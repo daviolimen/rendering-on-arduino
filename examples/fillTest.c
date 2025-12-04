@@ -1,5 +1,7 @@
 // This program is to test if the display powers on and if the orientation is correct
 // It should render four squares of colors red, blue, yellow and green
+// If the orientation is not the one you wanted, you can change the MADCTL command in the initSequence
+
 #include "display.h"
 
 #define COLOR_BLACK 0x0000
@@ -21,14 +23,14 @@ void loop(void) {
     setWindow(0, 0, 239, 319);
     SLAVE_SELECT;
     DC_DATA;
-    for (uint32_t row = 0; row < 320; row++) {
-        for (uint32_t col = 0; col < 240; col++) {
+    for (uint16_t col = 0; col < 320; col++) {
+        for (uint16_t row = 0; row < 240; row++) {
             uint16_t color;
-            if (row < 160) {
-                if (col < 120) color = COLOR_RED;
+            if (row < 120) {
+                if (col < 160) color = COLOR_RED;
                 else color = COLOR_BLUE;
             } else {
-                if (col < 120) color = COLOR_YELLOW;
+                if (col < 160) color = COLOR_YELLOW;
                 else color = COLOR_GREEN;
             }
             spiWrite(color >> 8);

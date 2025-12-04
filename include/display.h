@@ -1,3 +1,5 @@
+// This header file provides useful functions to control the 240x320 display
+
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
@@ -65,7 +67,7 @@ static const uint8_t PROGMEM initSequence[] = {
 	SWRESET, DELAY, 150,
 	SLPOUT, DELAY, 10,
 	COLMOD, 1+DELAY, 0x55, 10,
-	MADCTL, 1, MADCTL_MX | MADCTL_MY | MADCTL_RGB,
+	MADCTL, 1, MADCTL_MX | MADCTL_RGB,
 	CASET, 4, 0, 0, 239>>8, 239&0xff,
 	RASET, 4, 0, 0, 319>>8, 319&0xff,
 	INVON, DELAY, 10,
