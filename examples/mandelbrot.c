@@ -31,6 +31,7 @@ void setup(void) {
 #define MINX -2
 #define MAXY 1
 
+// function to transform red, green and blue values into a 16-bit RGB565 color
 uint16_t getColor(uint8_t red, uint8_t green, uint8_t blue) {
     uint16_t color = (uint16_t) (red << 11) | (green << 5) | blue;
     return color;
@@ -55,7 +56,9 @@ void loop(void) {
                 a = a2 - b2 + x;
             }
 
-            uint32_t factor = FP(n) / 30;
+            // here I set the colors of the set, the inside of the set (n == 30) are colored black
+            // while the rest of the set gets a scaled gray color
+            uint32_t factor = (n >= 30) ? 0 : FP(n) / 30;
             uint16_t color = getColor((factor * 32) >> FP_SHIFT, (factor * 64) >> FP_SHIFT, (factor * 32) >> FP_SHIFT);
             spiWrite(color >> 8);
             spiWrite(color);
