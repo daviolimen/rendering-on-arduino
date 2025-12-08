@@ -44,6 +44,8 @@ void loop(void) {
     SLAVE_SELECT;
     DC_DATA;
     for (uint16_t col = 0; col < 320; col++) {
+        uartWrite('R');
+
         for (uint16_t row = 0; row < 480; row++) {
             buffer[row] = uartRead(); 
         }
