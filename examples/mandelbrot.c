@@ -31,6 +31,11 @@ void setup(void) {
 #define MINX -2
 #define MAXY 1
 
+uint16_t getColor(uint8_t red, uint8_t green, uint8_t blue) {
+    uint16_t color = (uint16_t) (red << 11) | (green << 5) | blue;
+    return color;
+}
+
 void loop(void) {
     setWindow(0, 0, 239, 319);
     SLAVE_SELECT;
@@ -50,9 +55,8 @@ void loop(void) {
                 a = a2 - b2 + x;
             }
 
-            uint16_t color;
-            if (n < 20) color = COLOR_BLACK;
-            else color = COLOR_WHITE;
+            uint32_t factor = FP(n) / 30;
+            uint16_t color = getColor((factor * 32) >> FP_SHIFT, (factor * 64) >> FP_SHIFT, (factor * 32) >> FP_SHIFT);
             spiWrite(color >> 8);
             spiWrite(color);
         }
