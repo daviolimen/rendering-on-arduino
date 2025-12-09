@@ -3,7 +3,8 @@
 from PIL import Image
 import struct
 
-img = Image.open("test_image.jpg").convert("RGB")
+img = Image.open("ferrari-f40.jpg").convert("RGB")
+img = img.rotate(-90, expand=True)
 img = img.transpose(Image.FLIP_LEFT_RIGHT)
 img = img.resize((240, 320))
 image_bytes = bytearray()
